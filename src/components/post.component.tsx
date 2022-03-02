@@ -50,7 +50,6 @@ export const PostComponent: React.FC<{ tipoServicio: Enums.EnumTipoServico }> = 
                 setTituloPost("Locales")
                 setAccionesPost([EnumPermisosArticulo.Leer, EnumPermisosArticulo.Crear,
                 EnumPermisosArticulo.Editar, EnumPermisosArticulo.Eliminar])
-                console.log("Url: " + process.env.REACT_APP_REMOTE_PLUS_URL);
                 break;
             default: break;
         }

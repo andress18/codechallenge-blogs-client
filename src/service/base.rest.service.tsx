@@ -23,7 +23,6 @@ export default class BaseRestService {
         const res = await axios.get<T>(url)
             .then((response: any) => {
                 const result = response.data;
-                // console.log("info=>"+JSON.stringify(result));
                 return new Response(true, result as T, "Success", "");
             })
             .catch(function (error) {
@@ -32,8 +31,6 @@ export default class BaseRestService {
         return res;
     }
     public static delete(url: string, param: any): Promise<Response> {
-        console.log(param);
-
         const res = axios.delete(url, { data: param })
             .then(response => {
                 const result = response.data;

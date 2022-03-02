@@ -81,12 +81,12 @@ export const Articulo: React.FC<ArticuloProps> = ({ acciones, articulo, id, tipo
             <div key={articulo.title} className="mb-3 align-content-center col-xl-6">
                 <h2 className="display-5" style={titleStyle} >{articulo.title}</h2>
                 <p className="lead" style={descriptionStyle}>{articulo.description}</p>
-                <p className="lead" style={descriptionStyle}> <label style={sourceStyle} className='mx-2'> by {articulo.source.name} at {new Date(articulo.publishedAt).toLocaleDateString()}</label></p>
+                <p className="mx-2" style={sourceStyle}> by <a href={articulo.source.url} style={sourceStyle} className='mx-2 link'> {articulo.source.name}</a> at {new Date(articulo.publishedAt).toLocaleDateString()}</p>
                 <p className="lead" style={contentStyle}>{articulo.content} <a href={articulo.url} className='link'>ver mas</a></p>
                 {acciones.some(e => e === EnumPermisosArticulo.Editar)
-                    && <Button onClick={onClickEditBtn} style={descriptionStyle} variant="outline-warning mx-2" size="sm">Editar artículo</Button>}
+                    && <Button onClick={onClickEditBtn} style={descriptionStyle} variant="outline-warning m-2" size="sm">Editar artículo</Button>}
                 {acciones.some(e => e === EnumPermisosArticulo.Eliminar)
-                    && <Button variant="outline-danger mx-2" style={descriptionStyle} onClick={onClickDeleteBtn}>Eliminar artículo</Button>}
+                    && <Button variant="outline-danger m-2" style={descriptionStyle} onClick={onClickDeleteBtn}>Eliminar artículo</Button>}
             </div>
         </div>
     </>
