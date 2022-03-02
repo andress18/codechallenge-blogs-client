@@ -10,6 +10,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import ModalArticulo from './Articulos/modalArticulo.component';
 import '../fonts.css'
 import CSS from 'csstype';
+import config from '../config';
 
 export const PostComponent: React.FC<{ tipoServicio: Enums.EnumTipoServico }> = ({ tipoServicio }) => {
     const [, setArticuloLocalStorage] = useLocalStorage<Article>('Articulo', new Article())
@@ -32,6 +33,29 @@ export const PostComponent: React.FC<{ tipoServicio: Enums.EnumTipoServico }> = 
         fontFamily: 'DM Serif Display, serif',
         fontSize: '40px'
     };
+
+    function ConfigurarEntorno() {
+        switch (tipoServicio) {
+            case Enums.EnumTipoServico.RemotePlus:
+                setRutaPost(config.serverAPI)
+                setTituloPost("Remote +")
+                setAccionesPost([EnumPermisosArticulo.Leer])
+                break;
+            case Enums.EnumTipoServico.Remote:
+                setRutaPost(config.gnewsAPI)
+                setTituloPost("Remote")
+                setAccionesPost([EnumPermisosArticulo.Leer])
+                break;
+            case Enums.EnumTipoServico.Local:
+                setTituloPost("Locales")
+                setAccionesPost([EnumPermisosArticulo.Leer, EnumPermisosArticulo.Crear,
+                EnumPermisosArticulo.Editar, EnumPermisosArticulo.Eliminar])
+                console.log("Url: " + process.env.REACT_APP_REMOTE_PLUS_URL);
+                break;
+            default: break;
+        }
+    }
+
     useEffect(() => {
         ConfigurarEntorno()
         if (tipoServicio === Enums.EnumTipoServico.Local)
@@ -98,27 +122,6 @@ export const PostComponent: React.FC<{ tipoServicio: Enums.EnumTipoServico }> = 
                 }
                 setPostCambiado(!postCambiado)
             }
-        }
-    }
-
-    function ConfigurarEntorno() {
-        switch (tipoServicio) {
-            case Enums.EnumTipoServico.RemotePlus:
-                setRutaPost('https://postsrestapi.azurewebsites.net/api/Posts')
-                setTituloPost("Remote +")
-                setAccionesPost([EnumPermisosArticulo.Leer])
-                break;
-            case Enums.EnumTipoServico.Remote:
-                setRutaPost("https://gnews.io/api/v4/search?q=watches&token=c12d65b64bd5ecbe918e73b18fe5725f")
-                setTituloPost("Remote")
-                setAccionesPost([EnumPermisosArticulo.Leer])
-                break;
-            case Enums.EnumTipoServico.Local:
-                setTituloPost("Locales")
-                setAccionesPost([EnumPermisosArticulo.Leer, EnumPermisosArticulo.Crear,
-                EnumPermisosArticulo.Editar, EnumPermisosArticulo.Eliminar])
-                break;
-            default: break;
         }
     }
 

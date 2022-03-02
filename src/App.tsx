@@ -17,8 +17,8 @@ const App: React.FC = () => {
         </header>
         <div className="">
             <PostComponent tipoServicio={EnumTipoServico.Local} />
-            {/* <PostComponent tipoServicio={EnumTipoServico.Remote} />
-            <PostComponent tipoServicio={EnumTipoServico.RemotePlus} /> */}
+            <PostComponent tipoServicio={EnumTipoServico.Remote} />
+            <PostComponent tipoServicio={EnumTipoServico.RemotePlus} /> 
         </div>
         <footer className="text-center">
             <p>Posts page made by: Andrés Suárez.</p>
