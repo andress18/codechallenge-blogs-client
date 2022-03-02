@@ -17,17 +17,11 @@ const App: React.FC = () => {
                 <Nav.Item className='text-white' >Page made by: Andrés Suárez</Nav.Item>
                 <Nav.Link href="https://github.com/andress18/codechallenge-blogs-client">GitHub Repo</Nav.Link>
             </Navbar>
-            {/* <div className="text-center">
-                <p>Posts page made by: Andrés Suárez.</p>
-                <p>
-                    <a href="https://github.com">Go to source code</a>
-                </p>
-            </div> */}
         </header>
         <div className="">
             <PostComponent tipoServicio={EnumTipoServico.Local} />
-            {/* <PostComponent tipoServicio={EnumTipoServico.Remote} />
-            <PostComponent tipoServicio={EnumTipoServico.RemotePlus} />  */}
+            <PostComponent tipoServicio={EnumTipoServico.Remote} />
+            <PostComponent tipoServicio={EnumTipoServico.RemotePlus} /> 
         </div>
     </>);
 }
