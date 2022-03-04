@@ -13,6 +13,7 @@ interface Props {
     textBtnSave: string,
 }
 
+const urlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/
 
 const schema = yup.object().shape({
     title: yup.string().min(10, 'Debe contener al menos 10 caracteres').required('Este campo es obligatorio'),
@@ -20,13 +21,13 @@ const schema = yup.object().shape({
     content: yup.string().min(50, 'Debe contener al menos 50 caracteres'),
     image: yup.string().required(),
     url: yup.string().matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        urlRegex,
         'Debe ingresar una URL válida'
     ).required(),
     source: yup.object().shape({
         name: yup.string().min(3, 'Debe contener al menos 3 caracteres'),
         url: yup.string().matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            urlRegex,
             'Debe ingresar una URL válida'
         ).required()
     }),
@@ -66,7 +67,7 @@ const ArticuloForm: React.FC<Props> = (props: Props) => {
                 <Form.Group className="m-2 col-md-12 col-sm-12" controlId="articuloForm.Title">
                     <Form.Label style={titleStyle}>Título</Form.Label>
                     <Form.Control type="text" placeholder="Título del artículo" defaultValue={articulo.title} {...register("title")} autoFocus={true} />
-                    {errors.title && ErrorText(errors.title.message??"")}
+                    {errors.title && ErrorText(errors.title.message ?? "")}
                 </Form.Group>
                 <Form.Group className="m-2 col-md-12 col-sm-12" controlId="articuloForm.Description">
                     <Form.Label style={titleStyle}>Descripción</Form.Label>
@@ -85,7 +86,7 @@ const ArticuloForm: React.FC<Props> = (props: Props) => {
                 </Form.Group>
                 <Form.Group className="m-2 col-lg-5 col-xl-5 col-sm-4" controlId="articuloForm.DatePublished">
                     <Form.Label style={titleStyle}>Fecha Publicación</Form.Label>
-                    <Form.Control type="date" placeholder="Fecha de publicación" defaultValue={new Date(articulo?.publishedAt).toISOString().split('T')[0]}  {...register("publishedAt")}  />
+                    <Form.Control type="date" placeholder="Fecha de publicación" defaultValue={new Date(articulo?.publishedAt).toISOString().split('T')[0]}  {...register("publishedAt")} />
                     {/* <Form.Control type="text" placeholder="Fecha de publicación" defaultValue={articulo?.publishedAt?.toString()} {...register("publishedAt")} /> */}
                     {errors.publishedAt && ErrorText("Formato de fecha debe ser yyyy-mm-dd")}
                 </Form.Group>
